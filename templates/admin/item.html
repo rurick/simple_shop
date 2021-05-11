@@ -1,0 +1,85 @@
+{% extends "admin/index.html" %}
+
+{% block innerpage %}
+<h2 >
+    {% if additem %}
+        Добавить товар
+    {% else %}
+        Редактировать товар
+    {% endif %}
+    {% if error %}
+        <div  class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
+    
+</h2>
+<form method="post">
+<div class="row">
+    <div class="col-3">
+        Название:
+    </div>
+    <div class="col">
+        <input type="text" name="name" value="{{ object.name }}" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Цена:
+    </div>
+    <div class="col">
+        <input type="text" name="price" value="{{ object.price }}" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Описание:
+    </div>
+    <div class="col">
+        <input type="text" name="description" value="{{ object.description }}" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        короткое описание:
+    </div>
+    <div class="col">
+        <input type="text" name="short" value="{{ object.short }}" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Рубрика:
+    </div>
+    <div class="col">
+        <select name="rubric"  class="form-control">
+            {% for rubric in rubrics %}
+               <option value="{{ rubric._id }}" >{{ rubric.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Наличие:
+    </div>
+    <div class="col">
+        <input type="checkbox" name="available" value="1" {% if object.available %}checked="1"{% endif %} class="form-check-input" >
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <input type="submit"  value="Сохранить" class="btn btn-primary">
+        {% if showdel %}
+            <a href="/admin/items/del/{{ object._id }}" class="btn btn-danger" id="delbtn">Удалить</a>
+        {% endif %}
+    </div>
+</div>
+</form>
+
+<script>
+    $("#delbtn").click(()=>{
+        if (!confirm("Удалить пользователя?")) return false;
+    });
+    $("select option[value={{object.rubric}}]").attr("selected", "selected")
+</script>
+{% endblock %}
+

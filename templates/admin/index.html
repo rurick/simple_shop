@@ -1,0 +1,22 @@
+{% extends "admin/_base.html" %}
+{% block content%}
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link {% if page == 'rubrics' %}active{% endif %}" href="/admin/rubrics">Рубрики</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if page == 'items' %}active{% endif %}" href="/admin/items">Товары</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if page == 'users' %}active{% endif %}" href="/admin/users">Пользователи</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if page == 'orders' %}active{% endif %}" href="/admin/orders">Заказы</a>
+		</li>
+	</ul>
+	<div class="jumbotron">
+		{% block innerpage %}
+		<h2>Добро пожаловать Админ!</h2>
+		{% endblock %}
+	</div>
+{% endblock %}

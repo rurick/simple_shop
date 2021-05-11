@@ -1,0 +1,53 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item" aria-current="page"><a href="/">Главная</a></li>
+	<li class="breadcrumb-item" aria-current="page"><a href="/order/list">Заказы</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Оплата</li>
+</ol>
+
+<h2>Оплата заказа<h2>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th> Название 
+				<th> Цена
+				<th> Количество
+		<tbody>
+	{% for obj in order.items %}
+		<tr>
+			<td>{{ obj.item_name }}
+			<td>{{ obj.price }}
+			<td>{{ obj.cnt }}
+		</tr>
+	{% endfor %} 
+		</tbody>
+	</table>
+
+	<div class="card" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Адрес доставки:</h5>
+			<p class="card-text">{{order.address}}</p>
+		</div>
+	</div>	
+
+	<form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+		<input type="hidden" name="receiver" value="410013254060357">
+		<input type="hidden" name="formcomment" value="Оплата заказа {{order._id}}">
+		<input type="hidden" name="short-dest" value="Оплата заказа {{order._id}}">
+		<input type="hidden" name="label" value="{{order._id}}">
+		<input type="hidden" name="quickpay-form" value="shop">
+		<input type="hidden" name="targets" value="Оплата заказа {{order._id}}">
+		<input type="hidden" name="sum" value="{{order.sum}}" data-type="number">
+		<input type="hidden" name="need-fio" value="true">
+		<input type="hidden" name="need-email" value="true">
+		<input type="hidden" name="need-phone" value="false">
+		<input type="hidden" name="need-address" value="false">
+		<input type="hidden" name="successURL" value="mysite.com/order/{{order._id}}">
+		<label><input type="radio" name="paymentType" value="PC">Яндекс.Деньгами</label>
+		<label><input type="radio" name="paymentType" value="AC">Банковской картой</label>
+		<input type="submit" value="Оплатить {{order.sum}}">
+	</form>
+
+{% endblock %}

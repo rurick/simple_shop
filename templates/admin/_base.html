@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<title>Онлайн магазин - Панель администрирования</title>
+		<link rel='stylesheet' href='/css/style.css' />
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<script src="/js/jquery-3.5.1.slim.min.js"></script>
+		<script src="/js/popper.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h1>Панель администратора</h1>
+				</div>
+				<div class="col1">
+					{% if req.is_auth %}
+					<div>{{ req.session.user.email }}</div>
+					<a href="/admin/logout">Выйти</a>
+					{% endif %}
+				</div>
+			</div>			
+			
+			{% block content%}
+			{% endblock %}
+		</div>
+	</body>
+</html>

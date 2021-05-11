@@ -1,0 +1,26 @@
+{% extends "admin/index.html" %}
+
+{% block innerpage %}
+<div class="row">
+	<a href="/admin/items/add" class="btn btn-primary" >Создать</a>
+</div>
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th> Name 
+			<th> Price 
+			<th> Наличие
+			<th> Rubric
+			<th>
+	<tbody>
+	{% for obj in objects %}
+		<tr>
+			<td>{{ obj.name }}
+			<td>{{ obj.price }}
+			<td>{{ obj.available }}
+			<td>{{ obj.rubric_name }}
+			<td><a href="/admin/items/{{ obj._id }}">Edit</a>
+	{% endfor %}
+</table>
+{% endblock %}
+

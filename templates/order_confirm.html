@@ -1,0 +1,39 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item" aria-current="page"><a href="/">Главная</a></li>
+		<li class="breadcrumb-item" aria-current="page"><a href="/order/list">Заказы</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Подтверждение</li>
+	</ol>
+</nav>
+	<h1>Ваш заказ</h1>
+	{% if objects|length == 0 %}
+		<p> Ваша корзина пуста </p>
+	{% else %}
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th> Название 
+					<th> Цена
+					<th> Количество
+			<tbody>
+		{% for obj in objects %}
+			<tr>
+				<td>{{ obj.item_name }}
+				<td>{{ obj.price }}
+				<td>{{ obj.cnt }}
+			</tr>
+		{% endfor %} 
+			</tbody>
+		</table>
+
+		<div class="row">
+			<div class="col">Итого:</div>
+			<div class="col">{{ sum }}</div>
+		</div>			
+		<a href="/order/do" class="btn btn-secondary">Подтвердить заказ</a>
+	{% endif %}
+
+{% endblock %}

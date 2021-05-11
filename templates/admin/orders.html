@@ -1,0 +1,26 @@
+{% extends "admin/index.html" %}
+
+{% block innerpage %}
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th> User Name 
+			<th> Date 
+			<th> Status
+			<th> Comment
+			<th> Sum
+			<th>
+	<tbody>
+	{% set stat = {'0': "Подтверждение...", '1': "Ожидает оплаты", '2': "Ожидает отправки", '3': "Отправлен"} %}
+	{% for obj in objects %}
+		<tr>
+			<td>{{ obj.username }}
+			<td>{{ obj.date }}
+			<td>{{ stat[obj.status|string] }}
+			<td>{{ obj.comment|truncate(32) }}
+			<td>{{ obj.sum }}
+			<td><a href="/admin/orders/{{ obj._id }}">Edit</a>
+	{% endfor %}
+</table>
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item" aria-current="page"><a href="/">Главная</a></li>
+		<li class="breadcrumb-item" aria-current="page"><a href="/order/list">Заказы</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Детали заказа</li>
+	</ol>
+</nav>
+	<h1>Ваш заказ</h1>
+	{% set stat = {'0': "Подтверждение...", '1': "Ожидает оплаты", '2': "Ожидает отправки", '3': "Отправлен"} %}
+	<p>Текущий статус: {{ stat[order.status|string] }}</p>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th> Название 
+				<th> Цена
+				<th> Количество
+		<tbody>
+	{% for obj in order.items %}
+		<tr>
+			<td>{{ obj.item_name }}
+			<td>{{ obj.price }}
+			<td>{{ obj.cnt }}
+		</tr>
+	{% endfor %} 
+		</tbody>
+	</table>
+
+	<div class="row">
+		<div class="col">Итого:</div>
+		<div class="col">{{ order.sum }}</div>
+	</div>	
+
+
+
+{% endblock %}

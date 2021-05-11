@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active" aria-current="page">Главная</li>
+	</ol>
+</nav>
+
+<div class="row row-cols-md-3">
+	{% for it in items %}
+	<div class="col mb-4">
+		<div class="card border-primary mb-3" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">{{it.name}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">{{it.price}}</h6>
+				<p class="card-text">{{ it.short|truncate(164) }}</p>
+				<a href="/item/{{ it._id }}" class="card-link">Подробнее</a>
+			</div>
+		</div>	
+	</div>	
+	{% endfor %}
+</div>
+
+{% endblock %}

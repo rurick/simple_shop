@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item" aria-current="page"><a href="/">Главная</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Личный кабинет</li>
+	</ol>
+</nav>
+
+<div class="row">
+	<div class="col">Name:</div>
+	<div class="col">{{ user.name }}</div>
+</div>
+<div class="row">
+	<div class="col">Email:</div>
+	<div class="col">{{ user.email }}</div>
+</div>
+<div class="row">
+	<div class="col">is_admin:</div>
+	<div class="col">{{ user.is_admin }}</div>
+</div>
+
+<a href="/order/list" class="btn btn-secondary">Мои заказы</a>
+<a href="/account/logout" class="btn btn-secondary">Выйти</a>
+
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "admin/index.html" %}
+
+{% block innerpage %}
+<h2 >
+    {% if adduser %}
+        Добавить пользователя
+    {% else %}
+        Редактировать пользователя
+    {% endif %}
+    {% if error %}
+        <div  class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
+    
+</h2>
+<form method="post">
+<div class="row">
+    <div class="col-3">
+        Имя:
+    </div>
+    <div class="col">
+        <input type="text" name="name" value="{{ object.name }}" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Email:
+    </div>
+    <div class="col">
+        <input type="text" name="email" value="{{ object.email }}" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Обновить пароль:
+    </div>
+    <div class="col">
+        <input type="text" name="password" value="" class="form-control">
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        Админ:
+    </div>
+    <div class="col">
+        <input type="checkbox" name="is_admin" value="1" {% if object.is_admin %}checked="1"{% endif %} class="form-check-input" >
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <input type="submit"  value="Сохранить" class="btn btn-primary">
+        {% if showdel %}
+            <a href="/admin/users/del/{{ object._id }}" class="btn btn-danger" id="delbtn">Удалить</a>
+        {% endif %}
+    </div>
+</div>
+</form>
+
+<script>
+    $("#delbtn").click(()=>{
+        if (!confirm("Удалить пользователя?")) return false;
+    });
+</script>
+{% endblock %}
+

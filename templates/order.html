@@ -1,0 +1,44 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item" aria-current="page"><a href="/">Главная</a></li>
+		<li class="breadcrumb-item" aria-current="page"><a href="/order/list">Заказы</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Детали заказа</li>
+	</ol>
+</nav>
+	<h1>Ваш заказ подтверждён</h1>
+	<p>Заказ зарезервирован. Оплатите его в течении 3 дней</p>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th> Название 
+				<th> Цена
+				<th> Количество
+		<tbody>
+	{% for obj in order.items %}
+		<tr>
+			<td>{{ obj.item_name }}
+			<td>{{ obj.price }}
+			<td>{{ obj.cnt }}
+		</tr>
+	{% endfor %} 
+		</tbody>
+	</table>
+
+	<div class="row">
+		<div class="col">Итого:</div>
+		<div class="col">{{ order.sum }}</div>
+	</div>	
+
+	<p>Введите данные для отправки заказа</p>
+	<form method="POST" action="/order/address/{{order._id}}">
+		<div class="form-group">
+			<label for="address">address </label>
+			<input type="text" name="address" class="form-control" id="address">
+		</div>
+		<button type="submit" class="btn btn-primary">Перейти к оплате</button>
+	</form>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "admin/index.html" %}
+
+{% block innerpage %}
+<h2 >
+    {% if addrubric %}
+        Добавить рубрику
+    {% else %}
+        Редактировать рубрику
+    {% endif %}
+    {% if error %}
+        <div  class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
+    
+</h2>
+<form method="post">
+<div class="row">
+    <div class="col-3">
+        Имя:
+    </div>
+    <div class="col">
+        <input type="text" name="name" value="{{ object.name }}" class="form-control">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <input type="submit"  value="Сохранить" class="btn btn-primary">
+        {% if showdel %}
+            <a href="/admin/rubrics/del/{{ object._id }}" class="btn btn-danger" id="delbtn">Удалить</a>
+        {% endif %}
+    </div>
+</div>
+</form>
+
+<script>
+    $("#delbtn").click(()=>{
+        if (!confirm("Удалить рубрику?")) return false;
+    });
+</script>
+{% endblock %}
+
